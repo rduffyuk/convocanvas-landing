@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ConvoCanvas - Transform conversations into structured knowledge. Coming Soon.">
+    <meta name="author" content="Ryan Duffy">
+    <title>ConvoCanvas - Coming Soon</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #1e1e1e;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #dcddde;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Obsidian-inspired animated gradient background */
+        body::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 20%, rgba(123, 97, 255, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(88, 101, 242, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 50% 50%, rgba(58, 134, 255, 0.1) 0%, transparent 50%);
+            animation: gradientShift 20s ease infinite;
+            pointer-events: none;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(5%, -5%) rotate(120deg); }
+            66% { transform: translate(-5%, 5%) rotate(240deg); }
+        }
+
+        .container {
+            text-align: center;
+            max-width: 700px;
+            animation: fadeIn 1s ease-in;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Obsidian-style glowing logo effect */
+        .logo-container {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.03em;
+            background: linear-gradient(135deg, #7b61ff 0%, #5865f2 50%, #3a86ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            display: inline-block;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #7b61ff 0%, #5865f2 50%, #3a86ff 100%);
+            filter: blur(40px);
+            opacity: 0.3;
+            z-index: -1;
+            animation: glowPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.5; transform: translate(-50%, -50%) scale(1.05); }
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 2.5rem;
+            color: #b9bbbe;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+        }
+
+        .description {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            margin-bottom: 3rem;
+            color: #949ba4;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Obsidian-style status badge */
+        .status {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(123, 97, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 3rem;
+            border: 1px solid rgba(123, 97, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(123, 97, 255, 0.1);
+        }
+
+        .pulse-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #7b61ff;
+            border-radius: 50%;
+            margin-right: 10px;
+            box-shadow: 0 0 10px #7b61ff;
+            animation: pulseDot 2s ease-in-out infinite;
+        }
+
+        @keyframes pulseDot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.9); }
+        }
+
+        /* Obsidian-inspired button styles */
+        .links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .link-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.875rem 1.75rem;
+            background: linear-gradient(135deg, rgba(123, 97, 255, 0.2) 0%, rgba(88, 101, 242, 0.2) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(123, 97, 255, 0.3);
+            border-radius: 10px;
+            color: #dcddde;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .link-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .link-button:hover::before {
+            left: 100%;
+        }
+
+        .link-button:hover {
+            background: linear-gradient(135deg, rgba(123, 97, 255, 0.3) 0%, rgba(88, 101, 242, 0.3) 100%);
+            border-color: rgba(123, 97, 255, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(123, 97, 255, 0.3);
+        }
+
+        .link-button.primary {
+            background: linear-gradient(135deg, #7b61ff 0%, #5865f2 100%);
+            border-color: transparent;
+            box-shadow: 0 8px 20px rgba(123, 97, 255, 0.4);
+        }
+
+        .link-button.primary:hover {
+            background: linear-gradient(135deg, #8b71ff 0%, #6875f2 100%);
+            box-shadow: 0 12px 30px rgba(123, 97, 255, 0.5);
+        }
+
+        /* Feature hints - subtle */
+        .features {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: #949ba4;
+        }
+
+        .feature-icon {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #7b61ff 0%, #5865f2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+        }
+
+        .footer {
+            font-size: 0.875rem;
+            color: #72767d;
+            letter-spacing: 0.02em;
+        }
+
+        /* Graph visualization hint - subtle background element */
+        .graph-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: 80%;
+            background-image: radial-gradient(circle, rgba(123, 97, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            opacity: 0.5;
+            z-index: 0;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2.75rem;
+            }
+            .tagline {
+                font-size: 1.25rem;
+            }
+            .description {
+                font-size: 1rem;
+            }
+            .features {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="graph-bg"></div>
+
+    <div class="container">
+        <div class="logo-container">
+            <h1>ConvoCanvas</h1>
+        </div>
+
+        <p class="tagline">Transform conversations into structured knowledge</p>
+
+        <div class="status">
+            <span class="pulse-dot"></span>
+            Currently in Development
+        </div>
+
+        <p class="description">
+            ConvoCanvas is a powerful tool for capturing, organizing, and extracting insights from conversations.
+            Built on AI infrastructure with local LLM processing, it helps you turn unstructured dialogue into
+            actionable knowledge.
+        </p>
+
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">✓</div>
+                <span>AI-Powered Analysis</span>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">✓</div>
+                <span>Local Processing</span>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">✓</div>
+                <span>Knowledge Graphs</span>
+            </div>
+        </div>
+
+        <div class="links">
+            <a href="https://blog.rduffy.uk" class="link-button primary">Read the Blog</a>
+            <a href="https://github.com/rduffyuk" class="link-button">View GitHub</a>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2025 Ryan Duffy. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>
