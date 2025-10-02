@@ -20,7 +20,7 @@
             background: #000000;
             min-height: 100vh;
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             justify-content: center;
             color: #aaaaaa;
             padding: 40px 20px;
@@ -29,7 +29,7 @@
             overflow-y: auto;
         }
 
-        /* Scanline effect for authentic CRT look */
+        /* Scanline effect */
         body::before {
             content: '';
             position: fixed;
@@ -48,7 +48,7 @@
             z-index: 2;
         }
 
-        /* Subtle multi-color glow */
+        /* Subtle glow */
         body::after {
             content: '';
             position: fixed;
@@ -62,15 +62,14 @@
         }
 
         .container {
-            text-align: left;
-            max-width: 800px;
+            text-align: center;
+            max-width: 600px;
             width: 100%;
-            margin: 20px auto;
             animation: fadeIn 0.8s ease-out;
             position: relative;
             z-index: 3;
             border: 2px solid #5555ff;
-            padding: 2rem;
+            padding: 3rem 2rem;
             box-shadow: 0 0 20px rgba(85, 85, 255, 0.3);
         }
 
@@ -79,34 +78,14 @@
             to { opacity: 1; }
         }
 
-        /* Terminal header - Cyan (like command prompts) */
-        .terminal-header {
-            border-bottom: 2px solid #00ffff;
-            padding-bottom: 1rem;
-            margin-bottom: 2rem;
-            font-size: 0.85rem;
-            color: #00ffff;
-        }
-
-        .terminal-header::before {
-            content: '┌─[rduffy@ConvoCanvas]─[~/projects]';
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        .terminal-header::after {
-            content: '└──╼ $ ./convocanvas --info';
-            display: block;
-        }
-
         h1 {
             font-size: 3rem;
             font-weight: bold;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             letter-spacing: 0.05em;
         }
 
-        /* Split styling for Convo (white) and Canvas (LGBT rainbow) */
+        /* Convo (white) and Canvas (rainbow) */
         .logo-convo {
             color: #ffffff;
             text-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
@@ -114,13 +93,13 @@
 
         .logo-canvas {
             background: linear-gradient(90deg,
-                #e40303 0%,    /* Red */
-                #ff8c00 16%,   /* Orange */
-                #ffed00 33%,   /* Yellow */
-                #008026 50%,   /* Green */
-                #24408e 66%,   /* Blue */
-                #732982 83%,   /* Purple */
-                #e40303 100%   /* Red (loop) */
+                #e40303 0%,
+                #ff8c00 16%,
+                #ffed00 33%,
+                #008026 50%,
+                #24408e 66%,
+                #732982 83%,
+                #e40303 100%
             );
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -134,127 +113,33 @@
             100% { background-position: 200% 50%; }
         }
 
-        /* Tagline - Green (like success messages) */
+        /* Coming Soon message */
+        .coming-soon {
+            font-size: 2rem;
+            color: #ffff00;
+            margin-bottom: 2rem;
+            font-weight: bold;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Tagline */
         .tagline {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            color: #00ff00;
-            display: block;
-        }
-
-        .tagline::before {
-            content: '> ';
-            color: #00ff00;
-        }
-
-        /* Status - Yellow (like warnings/info) */
-        .status {
-            display: block;
-            background: rgba(255, 255, 0, 0.05);
-            padding: 0.75rem 1rem;
-            margin-bottom: 2rem;
-            font-size: 1rem;
-            font-weight: normal;
-            border-left: 3px solid #ffff00;
-            position: relative;
-            color: #ffff00;
-        }
-
-        .status::before {
-            content: '[STATUS] ';
-            color: #ffff00;
-            font-weight: bold;
-        }
-
-        .status::after {
-            content: '█';
-            color: #ffff00;
-            margin-left: 0.3rem;
-            animation: cursorBlink 1s step-end infinite;
-        }
-
-        @keyframes cursorBlink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-
-        /* System info - Cyan (like commands) */
-        .system-info {
-            font-size: 0.85rem;
-            color: #00ffff;
-            margin-bottom: 2rem;
-            padding: 0.5rem;
-            background: rgba(0, 255, 255, 0.03);
-        }
-
-        .system-info div {
-            margin-bottom: 0.25rem;
-        }
-
-        .system-info .label {
-            color: #00aaaa;
-        }
-
-        .system-info .value {
-            color: #00ffff;
-        }
-
-        /* Description - Gray/white (regular text) */
-        .description {
-            font-size: 1rem;
-            line-height: 1.8;
-            margin-bottom: 2rem;
+            font-size: 1.1rem;
             color: #cccccc;
+            margin-bottom: 3rem;
+            line-height: 1.6;
         }
 
-        .description::before {
-            content: '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n';
-            display: block;
-            color: #666666;
-            margin-bottom: 1rem;
-        }
-
-        /* Feature list - Green (success indicators) */
-        .features {
-            margin-bottom: 2rem;
-            border: 1px solid #00aa00;
-            padding: 1rem;
-        }
-
-        .features-title {
-            color: #00ff00;
-            margin-bottom: 0.75rem;
-            font-weight: bold;
-        }
-
-        .features-title::before {
-            content: '╔═══════════════════════════════════════╗\n║  ';
-            white-space: pre;
-        }
-
-        .features-title::after {
-            content: '\n╚═══════════════════════════════════════╝';
-            white-space: pre;
-        }
-
-        .feature {
-            display: block;
-            padding: 0.5rem 0;
-            font-size: 0.95rem;
-            color: #aaaaaa;
-        }
-
-        .feature::before {
-            content: '[✓] ';
-            color: #00ff00;
-            margin-right: 0.5rem;
-        }
-
-        /* Terminal-style buttons - Blue (like directory listings) */
+        /* Links */
         .links {
             display: flex;
             gap: 1rem;
-            margin-bottom: 2rem;
+            justify-content: center;
             flex-wrap: wrap;
         }
 
@@ -269,7 +154,6 @@
             font-size: 0.95rem;
             transition: all 0.2s ease;
             font-family: 'Courier New', 'Courier', monospace;
-            position: relative;
         }
 
         .link-button::before {
@@ -280,94 +164,37 @@
             background: #5555ff;
             color: #000000;
             box-shadow: 0 0 15px rgba(85, 85, 255, 0.8);
-            transform: translateX(5px);
-        }
-
-        .link-button.primary {
-            background: #5555ff;
-            color: #000000;
-            box-shadow: 0 0 10px rgba(85, 85, 255, 0.6);
-            animation: primaryPulse 2s ease-in-out infinite;
-        }
-
-        @keyframes primaryPulse {
-            0%, 100% { box-shadow: 0 0 10px rgba(85, 85, 255, 0.6); }
-            50% { box-shadow: 0 0 20px rgba(85, 85, 255, 1); }
-        }
-
-        .link-button.primary:hover {
-            background: #7777ff;
-            transform: translateX(5px) scale(1.05);
-        }
-
-        /* Footer - Dark gray (like dimmed text) */
-        .footer {
-            font-size: 0.8rem;
-            color: #666666;
-            border-top: 1px solid #444444;
-            padding-top: 1rem;
-            margin-top: 1rem;
-        }
-
-        .footer::before {
-            content: '─────────────────────────────────────────────\n\n';
-            display: block;
-            color: #444444;
+            transform: translateY(-2px);
         }
 
         @media (max-width: 768px) {
-            h1 { font-size: 2rem; }
-            .container { padding: 1.5rem; }
+            h1 { font-size: 2.5rem; }
+            .coming-soon { font-size: 1.5rem; }
             .tagline { font-size: 1rem; }
-            .description { font-size: 0.9rem; }
-            .links { flex-direction: column; }
+            .container { padding: 2rem 1.5rem; }
         }
 
         @media (max-width: 480px) {
-            h1 { font-size: 1.5rem; }
-            .container { padding: 1rem; }
-            .terminal-header { font-size: 0.7rem; }
+            h1 { font-size: 2rem; }
+            .coming-soon { font-size: 1.25rem; }
+            .container { padding: 1.5rem 1rem; }
+            .links { flex-direction: column; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="terminal-header"></div>
-
         <h1><span class="logo-convo">Convo</span><span class="logo-canvas">Canvas</span></h1>
 
-        <p class="tagline">Transform conversations into structured knowledge</p>
+        <div class="coming-soon">Coming Soon</div>
 
-        <div class="status">Currently in Development</div>
-
-        <div class="system-info">
-            <div><span class="label">[SYS]</span> Initializing ConvoCanvas v0.1.0-alpha</div>
-            <div><span class="label">[SYS]</span> AI Infrastructure: <span class="value">ONLINE</span></div>
-            <div><span class="label">[SYS]</span> Local LLM Processing: <span class="value">ENABLED</span></div>
-            <div><span class="label">[SYS]</span> Knowledge Graph Engine: <span class="value">READY</span></div>
-        </div>
-
-        <div class="description">
-            ConvoCanvas is a powerful tool for capturing, organizing, and extracting insights from conversations.
-            Built on AI infrastructure with local LLM processing, it helps you turn unstructured dialogue into
-            actionable knowledge.
-        </div>
-
-        <div class="features">
-            <div class="features-title">CORE FEATURES</div>
-            <div class="feature">AI-Powered Analysis</div>
-            <div class="feature">Local Processing</div>
-            <div class="feature">Knowledge Graphs</div>
-        </div>
+        <p class="tagline">
+            Transform conversations into structured knowledge
+        </p>
 
         <div class="links">
-            <a href="https://blog.rduffy.uk" class="link-button primary">Read the Blog</a>
-            <a href="https://github.com/rduffyuk/ConvoCanvas" class="link-button">View GitHub</a>
-        </div>
-
-        <div class="footer">
-            <p>© 2025 Ryan Duffy. All rights reserved.</p>
-            <p>System: Linux | Terminal: xterm-256color | Shell: bash</p>
+            <a href="https://blog.rduffy.uk" class="link-button">Read the Blog</a>
+            <a href="https://github.com/rduffyuk/ConvoCanvas" class="link-button">View on GitHub</a>
         </div>
     </div>
 </body>
