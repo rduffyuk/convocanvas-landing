@@ -18,12 +18,13 @@
             background: #0a0a0a;
             min-height: 100vh;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: center;
             color: #e4e4e7;
-            padding: 20px;
+            padding: 40px 20px;
             position: relative;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
         }
 
         /* Animated mesh background - 2025 trend */
@@ -72,6 +73,7 @@
         .container {
             text-align: center;
             max-width: 800px;
+            margin-top: 20px;
             animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
             z-index: 1;
