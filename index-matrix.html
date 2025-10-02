@@ -27,6 +27,18 @@
             overflow-y: auto;
         }
 
+        /* Matrix rain canvas */
+        #matrix-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.15;
+        }
+
         /* Animated mesh background - 2025 trend */
         body::before {
             content: '';
@@ -289,41 +301,6 @@
             letter-spacing: 0.03em;
         }
 
-        /* Particle effect hint */
-        .particles {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .particle {
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            background: rgba(0, 245, 255, 0.3);
-            border-radius: 50%;
-            animation: particleFloat 20s linear infinite;
-        }
-
-        .particle:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 25s; }
-        .particle:nth-child(2) { left: 20%; animation-delay: 2s; animation-duration: 22s; }
-        .particle:nth-child(3) { left: 30%; animation-delay: 4s; animation-duration: 28s; }
-        .particle:nth-child(4) { left: 50%; animation-delay: 1s; animation-duration: 24s; }
-        .particle:nth-child(5) { left: 70%; animation-delay: 3s; animation-duration: 26s; }
-        .particle:nth-child(6) { left: 80%; animation-delay: 5s; animation-duration: 23s; }
-        .particle:nth-child(7) { left: 90%; animation-delay: 6s; animation-duration: 27s; }
-
-        @keyframes particleFloat {
-            0% { transform: translateY(100vh) scale(0); opacity: 0; }
-            10% { opacity: 0.5; }
-            90% { opacity: 0.5; }
-            100% { transform: translateY(-100vh) scale(1); opacity: 0; }
-        }
-
         @media (max-width: 768px) {
             h1 { font-size: 3.5rem; }
             .tagline { font-size: 1.4rem; }
@@ -341,15 +318,7 @@
     </style>
 </head>
 <body>
-    <div class="particles">
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-    </div>
+    <canvas id="matrix-canvas"></canvas>
 
     <div class="container">
         <div class="logo-container">
@@ -393,5 +362,69 @@
             <p>&copy; 2025 Ryan Duffy. All rights reserved.</p>
         </div>
     </div>
+
+    <script>
+        // Matrix Rain Animation with Tech Stack
+        const canvas = document.getElementById('matrix-canvas');
+        const ctx = canvas.getContext('2d');
+
+        // Set canvas size
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Tech stack to display (your actual infrastructure!)
+        const techStack = [
+            'Ollama', 'vLLM', 'PyTorch', 'ChromaDB', 'FastMCP',
+            'Prefect', 'Kafka', 'Jaeger', 'OpenTelemetry', 'K3s',
+            'Elasticsearch', 'Mistral', 'Qwen', 'DeepSeek', 'Hugo',
+            'Obsidian', 'Python', 'FastAPI', 'Redis', 'CUDA',
+            'RTX4080', 'Ubuntu', 'Cloudflare', 'Git', 'Aider'
+        ];
+
+        // Matrix rain configuration
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const drops = [];
+
+        // Initialize drops
+        for (let i = 0; i < columns; i++) {
+            drops[i] = Math.random() * -100;
+        }
+
+        // Draw matrix rain
+        function drawMatrix() {
+            // Semi-transparent black to create trail effect
+            ctx.fillStyle = 'rgba(10, 10, 10, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Cyan text color (matching your theme)
+            ctx.fillStyle = '#00f5ff';
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                // Get random tech stack item
+                const text = techStack[Math.floor(Math.random() * techStack.length)];
+
+                // Draw the text
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                // Reset drop to top randomly
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+
+                drops[i]++;
+            }
+        }
+
+        // Animation loop
+        setInterval(drawMatrix, 50);
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
 </body>
 </html>

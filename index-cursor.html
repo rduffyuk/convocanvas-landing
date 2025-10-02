@@ -134,6 +134,20 @@
                 0 8px 32px rgba(0, 245, 255, 0.1),
                 inset 0 1px 0 rgba(255, 255, 255, 0.05);
             animation: statusFloat 3s ease-in-out infinite;
+            position: relative;
+        }
+
+        /* Terminal cursor blink */
+        .status::after {
+            content: '█';
+            color: #00f5ff;
+            margin-left: 0.3rem;
+            animation: cursorBlink 1s step-end infinite;
+        }
+
+        @keyframes cursorBlink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
         }
 
         @keyframes statusFloat {
