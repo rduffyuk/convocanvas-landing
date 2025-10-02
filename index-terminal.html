@@ -102,14 +102,35 @@
             font-weight: bold;
             margin-bottom: 1rem;
             letter-spacing: 0.1em;
-            color: #00ff00;
-            text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
-            animation: textGlow 2s ease-in-out infinite;
         }
 
-        @keyframes textGlow {
-            0%, 100% { text-shadow: 0 0 10px rgba(0, 255, 0, 0.8); }
-            50% { text-shadow: 0 0 20px rgba(0, 255, 0, 1); }
+        /* Split styling for Convo (black) and Canvas (LGBT rainbow) */
+        .logo-convo {
+            color: #000000;
+            text-shadow: 0 0 2px rgba(0, 255, 0, 0.4);
+        }
+
+        .logo-canvas {
+            background: linear-gradient(90deg,
+                #e40303 0%,    /* Red */
+                #ff8c00 16%,   /* Orange */
+                #ffed00 33%,   /* Yellow */
+                #008026 50%,   /* Green */
+                #24408e 66%,   /* Blue */
+                #732982 83%,   /* Purple */
+                #e40303 100%   /* Red (loop) */
+            );
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: rainbowShift 3s linear infinite;
+            background-size: 200% 100%;
+            text-shadow: none;
+        }
+
+        @keyframes rainbowShift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
         }
 
         .prompt {
@@ -305,7 +326,7 @@
     <div class="container">
         <div class="terminal-header"></div>
 
-        <h1>CONVOCANVAS</h1>
+        <h1><span class="logo-convo">CONVO</span><span class="logo-canvas">CANVAS</span></h1>
 
         <p class="tagline">Transform conversations into structured knowledge</p>
 
