@@ -14,374 +14,348 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: #0a0a0a;
+            font-family: 'Courier New', 'Courier', monospace;
+            background: #000000;
             min-height: 100vh;
             display: flex;
             align-items: flex-start;
             justify-content: center;
-            color: #e4e4e7;
+            color: #aaaaaa;
             padding: 40px 20px;
             position: relative;
             overflow-x: hidden;
             overflow-y: auto;
         }
 
-        /* Animated mesh background - 2025 trend */
+        /* Scanline effect for authentic CRT look */
         body::before {
             content: '';
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image:
-                linear-gradient(rgba(0, 245, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 245, 255, 0.03) 1px, transparent 1px);
-            background-size: 100px 100px;
-            animation: meshMove 20s linear infinite;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(255, 255, 255, 0.02) 0px,
+                transparent 1px,
+                transparent 2px,
+                rgba(255, 255, 255, 0.02) 3px
+            );
             pointer-events: none;
+            z-index: 2;
         }
 
-        @keyframes meshMove {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(100px, 100px); }
-        }
-
-        /* Radial gradient overlays */
+        /* Subtle multi-color glow */
         body::after {
             content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background:
-                radial-gradient(circle at 20% 30%, rgba(0, 245, 255, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(123, 97, 255, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 50% 50%, rgba(88, 101, 242, 0.1) 0%, transparent 50%);
-            animation: gradientShift 25s ease infinite;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(100, 100, 255, 0.03) 0%, transparent 70%);
             pointer-events: none;
-        }
-
-        @keyframes gradientShift {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            33% { transform: translate(5%, -5%) rotate(120deg); }
-            66% { transform: translate(-5%, 5%) rotate(240deg); }
-        }
-
-        .container {
-            text-align: center;
-            max-width: 800px;
-            margin-top: 20px;
-            animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
             z-index: 1;
         }
 
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
+        .container {
+            text-align: left;
+            max-width: 800px;
+            width: 100%;
+            margin: 20px auto;
+            animation: fadeIn 0.8s ease-out;
+            position: relative;
+            z-index: 3;
+            border: 2px solid #5555ff;
+            padding: 2rem;
+            box-shadow: 0 0 20px rgba(85, 85, 255, 0.3);
         }
 
-        /* Enhanced logo with neon glow */
-        .logo-container {
-            margin-bottom: 2.5rem;
-            position: relative;
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Terminal header - Cyan (like command prompts) */
+        .terminal-header {
+            border-bottom: 2px solid #00ffff;
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+            font-size: 0.85rem;
+            color: #00ffff;
+        }
+
+        .terminal-header::before {
+            content: '┌─[rduffy@ConvoCanvas]─[~/projects]';
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .terminal-header::after {
+            content: '└──╼ $ ./convocanvas --info';
+            display: block;
         }
 
         h1 {
-            font-size: 5rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-            letter-spacing: -0.04em;
-            background: linear-gradient(135deg, #00f5ff 0%, #7b61ff 50%, #5865f2 100%);
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* Split styling for Convo (white) and Canvas (LGBT rainbow) */
+        .logo-convo {
+            color: #ffffff;
+            text-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
+        }
+
+        .logo-canvas {
+            background: linear-gradient(90deg,
+                #e40303 0%,    /* Red */
+                #ff8c00 16%,   /* Orange */
+                #ffed00 33%,   /* Yellow */
+                #008026 50%,   /* Green */
+                #24408e 66%,   /* Blue */
+                #732982 83%,   /* Purple */
+                #e40303 100%   /* Red (loop) */
+            );
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            position: relative;
-            display: inline-block;
-            animation: titleGlow 3s ease-in-out infinite;
+            animation: rainbowShift 3s linear infinite;
+            background-size: 200% 100%;
         }
 
-        @keyframes titleGlow {
-            0%, 100% { filter: drop-shadow(0 0 20px rgba(0, 245, 255, 0.5)); }
-            50% { filter: drop-shadow(0 0 40px rgba(0, 245, 255, 0.8)); }
+        @keyframes rainbowShift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
         }
 
+        /* Tagline - Green (like success messages) */
         .tagline {
-            font-size: 1.75rem;
-            margin-bottom: 3rem;
-            color: #a1a1aa;
-            font-weight: 400;
-            letter-spacing: -0.02em;
-        }
-
-        /* Enhanced glassmorphism status badge */
-        .status {
-            display: inline-flex;
-            align-items: center;
-            background: rgba(0, 245, 255, 0.05);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            padding: 1rem 2rem;
-            border-radius: 60px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 3rem;
-            border: 1px solid rgba(0, 245, 255, 0.2);
-            box-shadow:
-                0 8px 32px rgba(0, 245, 255, 0.1),
-                inset 0 1px 0 rgba(255, 255, 255, 0.05);
-            animation: statusFloat 3s ease-in-out infinite;
-        }
-
-        @keyframes statusFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-
-        .pulse-dot {
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            background: #00f5ff;
-            border-radius: 50%;
-            margin-right: 12px;
-            box-shadow: 0 0 15px #00f5ff, 0 0 30px rgba(0, 245, 255, 0.5);
-            animation: pulseDot 2s ease-in-out infinite;
-        }
-
-        @keyframes pulseDot {
-            0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 15px #00f5ff, 0 0 30px rgba(0, 245, 255, 0.5); }
-            50% { opacity: 0.6; transform: scale(0.85); box-shadow: 0 0 10px #00f5ff, 0 0 20px rgba(0, 245, 255, 0.3); }
-        }
-
-        .description {
             font-size: 1.2rem;
-            line-height: 1.9;
-            margin-bottom: 3.5rem;
-            color: #71717a;
-            max-width: 650px;
-            margin-left: auto;
-            margin-right: auto;
+            margin-bottom: 2rem;
+            color: #00ff00;
+            display: block;
         }
 
-        /* Feature cards with layered glassmorphism */
+        .tagline::before {
+            content: '> ';
+            color: #00ff00;
+        }
+
+        /* Status - Yellow (like warnings/info) */
+        .status {
+            display: block;
+            background: rgba(255, 255, 0, 0.05);
+            padding: 0.75rem 1rem;
+            margin-bottom: 2rem;
+            font-size: 1rem;
+            font-weight: normal;
+            border-left: 3px solid #ffff00;
+            position: relative;
+            color: #ffff00;
+        }
+
+        .status::before {
+            content: '[STATUS] ';
+            color: #ffff00;
+            font-weight: bold;
+        }
+
+        .status::after {
+            content: '█';
+            color: #ffff00;
+            margin-left: 0.3rem;
+            animation: cursorBlink 1s step-end infinite;
+        }
+
+        @keyframes cursorBlink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* System info - Cyan (like commands) */
+        .system-info {
+            font-size: 0.85rem;
+            color: #00ffff;
+            margin-bottom: 2rem;
+            padding: 0.5rem;
+            background: rgba(0, 255, 255, 0.03);
+        }
+
+        .system-info div {
+            margin-bottom: 0.25rem;
+        }
+
+        .system-info .label {
+            color: #00aaaa;
+        }
+
+        .system-info .value {
+            color: #00ffff;
+        }
+
+        /* Description - Gray/white (regular text) */
+        .description {
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            color: #cccccc;
+        }
+
+        .description::before {
+            content: '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n';
+            display: block;
+            color: #666666;
+            margin-bottom: 1rem;
+        }
+
+        /* Feature list - Green (success indicators) */
         .features {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            margin-bottom: 3.5rem;
-            flex-wrap: wrap;
+            margin-bottom: 2rem;
+            border: 1px solid #00aa00;
+            padding: 1rem;
+        }
+
+        .features-title {
+            color: #00ff00;
+            margin-bottom: 0.75rem;
+            font-weight: bold;
+        }
+
+        .features-title::before {
+            content: '╔═══════════════════════════════════════╗\n║  ';
+            white-space: pre;
+        }
+
+        .features-title::after {
+            content: '\n╚═══════════════════════════════════════╝';
+            white-space: pre;
         }
 
         .feature {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.875rem 1.5rem;
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            border-radius: 50px;
+            display: block;
+            padding: 0.5rem 0;
             font-size: 0.95rem;
-            color: #a1a1aa;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            color: #aaaaaa;
         }
 
-        .feature:hover {
-            background: rgba(0, 245, 255, 0.05);
-            border-color: rgba(0, 245, 255, 0.2);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 245, 255, 0.15);
+        .feature::before {
+            content: '[✓] ';
+            color: #00ff00;
+            margin-right: 0.5rem;
         }
 
-        .feature-icon {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #00f5ff 0%, #7b61ff 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 11px;
-            font-weight: bold;
-            box-shadow: 0 0 10px rgba(0, 245, 255, 0.3);
-        }
-
-        /* Enhanced buttons with neon effects */
+        /* Terminal-style buttons - Blue (like directory listings) */
         .links {
             display: flex;
-            gap: 1.25rem;
-            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
             flex-wrap: wrap;
-            margin-bottom: 4rem;
         }
 
         .link-button {
-            display: inline-flex;
-            align-items: center;
-            padding: 1rem 2.25rem;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            color: #e4e4e7;
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: #000000;
+            border: 2px solid #5555ff;
+            color: #5555ff;
             text-decoration: none;
-            font-weight: 600;
-            font-size: 1.05rem;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            font-weight: bold;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+            font-family: 'Courier New', 'Courier', monospace;
             position: relative;
-            overflow: hidden;
         }
 
         .link-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .link-button:hover::before {
-            left: 100%;
+            content: '> ';
         }
 
         .link-button:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.2);
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            background: #5555ff;
+            color: #000000;
+            box-shadow: 0 0 15px rgba(85, 85, 255, 0.8);
+            transform: translateX(5px);
         }
 
-        /* Neon CTA button - 2025 trend */
         .link-button.primary {
-            background: linear-gradient(135deg, #00f5ff 0%, #00a8cc 100%);
-            border: none;
-            color: #0a0a0a;
-            font-weight: 700;
-            box-shadow:
-                0 0 30px rgba(0, 245, 255, 0.5),
-                0 10px 30px rgba(0, 245, 255, 0.3);
-            animation: ctaPulse 3s ease-in-out infinite;
+            background: #5555ff;
+            color: #000000;
+            box-shadow: 0 0 10px rgba(85, 85, 255, 0.6);
+            animation: primaryPulse 2s ease-in-out infinite;
         }
 
-        @keyframes ctaPulse {
-            0%, 100% { box-shadow: 0 0 30px rgba(0, 245, 255, 0.5), 0 10px 30px rgba(0, 245, 255, 0.3); }
-            50% { box-shadow: 0 0 50px rgba(0, 245, 255, 0.7), 0 15px 40px rgba(0, 245, 255, 0.5); }
+        @keyframes primaryPulse {
+            0%, 100% { box-shadow: 0 0 10px rgba(85, 85, 255, 0.6); }
+            50% { box-shadow: 0 0 20px rgba(85, 85, 255, 1); }
         }
 
         .link-button.primary:hover {
-            background: linear-gradient(135deg, #1affff 0%, #00c8e6 100%);
-            transform: translateY(-4px) scale(1.02);
-            box-shadow:
-                0 0 60px rgba(0, 245, 255, 0.8),
-                0 20px 50px rgba(0, 245, 255, 0.5);
+            background: #7777ff;
+            transform: translateX(5px) scale(1.05);
         }
 
+        /* Footer - Dark gray (like dimmed text) */
         .footer {
-            font-size: 0.9rem;
-            color: #52525b;
-            letter-spacing: 0.03em;
+            font-size: 0.8rem;
+            color: #666666;
+            border-top: 1px solid #444444;
+            padding-top: 1rem;
+            margin-top: 1rem;
         }
 
-        /* Particle effect hint */
-        .particles {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .particle {
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            background: rgba(0, 245, 255, 0.3);
-            border-radius: 50%;
-            animation: particleFloat 20s linear infinite;
-        }
-
-        .particle:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 25s; }
-        .particle:nth-child(2) { left: 20%; animation-delay: 2s; animation-duration: 22s; }
-        .particle:nth-child(3) { left: 30%; animation-delay: 4s; animation-duration: 28s; }
-        .particle:nth-child(4) { left: 50%; animation-delay: 1s; animation-duration: 24s; }
-        .particle:nth-child(5) { left: 70%; animation-delay: 3s; animation-duration: 26s; }
-        .particle:nth-child(6) { left: 80%; animation-delay: 5s; animation-duration: 23s; }
-        .particle:nth-child(7) { left: 90%; animation-delay: 6s; animation-duration: 27s; }
-
-        @keyframes particleFloat {
-            0% { transform: translateY(100vh) scale(0); opacity: 0; }
-            10% { opacity: 0.5; }
-            90% { opacity: 0.5; }
-            100% { transform: translateY(-100vh) scale(1); opacity: 0; }
+        .footer::before {
+            content: '─────────────────────────────────────────────\n\n';
+            display: block;
+            color: #444444;
         }
 
         @media (max-width: 768px) {
-            h1 { font-size: 3.5rem; }
-            .tagline { font-size: 1.4rem; }
-            .description { font-size: 1.05rem; }
-            .features { flex-direction: column; gap: 1rem; }
-            .links { flex-direction: column; gap: 1rem; }
+            h1 { font-size: 2rem; }
+            .container { padding: 1.5rem; }
+            .tagline { font-size: 1rem; }
+            .description { font-size: 0.9rem; }
+            .links { flex-direction: column; }
         }
 
         @media (max-width: 480px) {
-            h1 { font-size: 2.5rem; }
-            .tagline { font-size: 1.15rem; }
-            .status { padding: 0.75rem 1.5rem; font-size: 0.95rem; }
-            .link-button { padding: 0.875rem 1.75rem; font-size: 0.95rem; }
+            h1 { font-size: 1.5rem; }
+            .container { padding: 1rem; }
+            .terminal-header { font-size: 0.7rem; }
         }
     </style>
 </head>
 <body>
-    <div class="particles">
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-    </div>
-
     <div class="container">
-        <div class="logo-container">
-            <h1>ConvoCanvas</h1>
-        </div>
+        <div class="terminal-header"></div>
+
+        <h1><span class="logo-convo">Convo</span><span class="logo-canvas">Canvas</span></h1>
 
         <p class="tagline">Transform conversations into structured knowledge</p>
 
-        <div class="status">
-            <span class="pulse-dot"></span>
-            Currently in Development
+        <div class="status">Currently in Development</div>
+
+        <div class="system-info">
+            <div><span class="label">[SYS]</span> Initializing ConvoCanvas v0.1.0-alpha</div>
+            <div><span class="label">[SYS]</span> AI Infrastructure: <span class="value">ONLINE</span></div>
+            <div><span class="label">[SYS]</span> Local LLM Processing: <span class="value">ENABLED</span></div>
+            <div><span class="label">[SYS]</span> Knowledge Graph Engine: <span class="value">READY</span></div>
         </div>
 
-        <p class="description">
+        <div class="description">
             ConvoCanvas is a powerful tool for capturing, organizing, and extracting insights from conversations.
             Built on AI infrastructure with local LLM processing, it helps you turn unstructured dialogue into
             actionable knowledge.
-        </p>
+        </div>
 
         <div class="features">
-            <div class="feature">
-                <div class="feature-icon">✓</div>
-                <span>AI-Powered Analysis</span>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">✓</div>
-                <span>Local Processing</span>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">✓</div>
-                <span>Knowledge Graphs</span>
-            </div>
+            <div class="features-title">CORE FEATURES</div>
+            <div class="feature">AI-Powered Analysis</div>
+            <div class="feature">Local Processing</div>
+            <div class="feature">Knowledge Graphs</div>
         </div>
 
         <div class="links">
@@ -390,7 +364,8 @@
         </div>
 
         <div class="footer">
-            <p>&copy; 2025 Ryan Duffy. All rights reserved.</p>
+            <p>© 2025 Ryan Duffy. All rights reserved.</p>
+            <p>System: Linux | Terminal: xterm-256color | Shell: bash</p>
         </div>
     </div>
 </body>
