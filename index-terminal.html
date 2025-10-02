@@ -20,7 +20,7 @@
             display: flex;
             align-items: flex-start;
             justify-content: center;
-            color: #00ff00;
+            color: #aaaaaa;
             padding: 40px 20px;
             position: relative;
             overflow-x: hidden;
@@ -37,16 +37,16 @@
             height: 100%;
             background: repeating-linear-gradient(
                 0deg,
-                rgba(0, 255, 0, 0.03) 0px,
+                rgba(255, 255, 255, 0.02) 0px,
                 transparent 1px,
                 transparent 2px,
-                rgba(0, 255, 0, 0.03) 3px
+                rgba(255, 255, 255, 0.02) 3px
             );
             pointer-events: none;
             z-index: 2;
         }
 
-        /* Subtle green glow */
+        /* Subtle multi-color glow */
         body::after {
             content: '';
             position: fixed;
@@ -54,7 +54,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at center, rgba(0, 255, 0, 0.05) 0%, transparent 70%);
+            background: radial-gradient(circle at center, rgba(100, 100, 255, 0.03) 0%, transparent 70%);
             pointer-events: none;
             z-index: 1;
         }
@@ -67,9 +67,9 @@
             animation: fadeIn 0.8s ease-out;
             position: relative;
             z-index: 3;
-            border: 2px solid #00ff00;
+            border: 2px solid #5555ff;
             padding: 2rem;
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+            box-shadow: 0 0 20px rgba(85, 85, 255, 0.3);
         }
 
         @keyframes fadeIn {
@@ -77,13 +77,13 @@
             to { opacity: 1; }
         }
 
-        /* Terminal header */
+        /* Terminal header - Cyan (like command prompts) */
         .terminal-header {
-            border-bottom: 2px solid #00ff00;
+            border-bottom: 2px solid #00ffff;
             padding-bottom: 1rem;
             margin-bottom: 2rem;
             font-size: 0.85rem;
-            color: #00cc00;
+            color: #00ffff;
         }
 
         .terminal-header::before {
@@ -101,13 +101,13 @@
             font-size: 3rem;
             font-weight: bold;
             margin-bottom: 1rem;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.05em;
         }
 
-        /* Split styling for Convo (black) and Canvas (LGBT rainbow) */
+        /* Split styling for Convo (white) and Canvas (LGBT rainbow) */
         .logo-convo {
-            color: #000000;
-            text-shadow: 0 0 2px rgba(0, 255, 0, 0.4);
+            color: #ffffff;
+            text-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
         }
 
         .logo-canvas {
@@ -125,7 +125,6 @@
             background-clip: text;
             animation: rainbowShift 3s linear infinite;
             background-size: 200% 100%;
-            text-shadow: none;
         }
 
         @keyframes rainbowShift {
@@ -133,15 +132,11 @@
             100% { background-position: 200% 50%; }
         }
 
-        .prompt {
-            color: #00cc00;
-            margin-right: 0.5rem;
-        }
-
+        /* Tagline - Green (like success messages) */
         .tagline {
             font-size: 1.2rem;
             margin-bottom: 2rem;
-            color: #00dd00;
+            color: #00ff00;
             display: block;
         }
 
@@ -150,27 +145,28 @@
             color: #00ff00;
         }
 
-        /* Status with blinking cursor */
+        /* Status - Yellow (like warnings/info) */
         .status {
             display: block;
-            background: rgba(0, 255, 0, 0.05);
+            background: rgba(255, 255, 0, 0.05);
             padding: 0.75rem 1rem;
             margin-bottom: 2rem;
             font-size: 1rem;
             font-weight: normal;
-            border-left: 3px solid #00ff00;
+            border-left: 3px solid #ffff00;
             position: relative;
+            color: #ffff00;
         }
 
         .status::before {
             content: '[STATUS] ';
-            color: #00ff00;
+            color: #ffff00;
             font-weight: bold;
         }
 
         .status::after {
             content: '█';
-            color: #00ff00;
+            color: #ffff00;
             margin-left: 0.3rem;
             animation: cursorBlink 1s step-end infinite;
         }
@@ -180,21 +176,43 @@
             51%, 100% { opacity: 0; }
         }
 
+        /* System info - Cyan (like commands) */
+        .system-info {
+            font-size: 0.85rem;
+            color: #00ffff;
+            margin-bottom: 2rem;
+            padding: 0.5rem;
+            background: rgba(0, 255, 255, 0.03);
+        }
+
+        .system-info div {
+            margin-bottom: 0.25rem;
+        }
+
+        .system-info .label {
+            color: #00aaaa;
+        }
+
+        .system-info .value {
+            color: #00ffff;
+        }
+
+        /* Description - Gray/white (regular text) */
         .description {
             font-size: 1rem;
             line-height: 1.8;
             margin-bottom: 2rem;
-            color: #00dd00;
+            color: #cccccc;
         }
 
         .description::before {
             content: '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n';
             display: block;
-            color: #00aa00;
+            color: #666666;
             margin-bottom: 1rem;
         }
 
-        /* Feature list - terminal style */
+        /* Feature list - Green (success indicators) */
         .features {
             margin-bottom: 2rem;
             border: 1px solid #00aa00;
@@ -221,7 +239,7 @@
             display: block;
             padding: 0.5rem 0;
             font-size: 0.95rem;
-            color: #00dd00;
+            color: #aaaaaa;
         }
 
         .feature::before {
@@ -230,7 +248,7 @@
             margin-right: 0.5rem;
         }
 
-        /* Terminal-style buttons */
+        /* Terminal-style buttons - Blue (like directory listings) */
         .links {
             display: flex;
             gap: 1rem;
@@ -242,8 +260,8 @@
             display: inline-block;
             padding: 0.75rem 1.5rem;
             background: #000000;
-            border: 2px solid #00ff00;
-            color: #00ff00;
+            border: 2px solid #5555ff;
+            color: #5555ff;
             text-decoration: none;
             font-weight: bold;
             font-size: 0.95rem;
@@ -257,33 +275,34 @@
         }
 
         .link-button:hover {
-            background: #00ff00;
+            background: #5555ff;
             color: #000000;
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.8);
+            box-shadow: 0 0 15px rgba(85, 85, 255, 0.8);
             transform: translateX(5px);
         }
 
         .link-button.primary {
-            background: #00ff00;
+            background: #5555ff;
             color: #000000;
-            box-shadow: 0 0 10px rgba(0, 255, 0, 0.6);
+            box-shadow: 0 0 10px rgba(85, 85, 255, 0.6);
             animation: primaryPulse 2s ease-in-out infinite;
         }
 
         @keyframes primaryPulse {
-            0%, 100% { box-shadow: 0 0 10px rgba(0, 255, 0, 0.6); }
-            50% { box-shadow: 0 0 20px rgba(0, 255, 0, 1); }
+            0%, 100% { box-shadow: 0 0 10px rgba(85, 85, 255, 0.6); }
+            50% { box-shadow: 0 0 20px rgba(85, 85, 255, 1); }
         }
 
         .link-button.primary:hover {
-            background: #00dd00;
+            background: #7777ff;
             transform: translateX(5px) scale(1.05);
         }
 
+        /* Footer - Dark gray (like dimmed text) */
         .footer {
             font-size: 0.8rem;
-            color: #00aa00;
-            border-top: 1px solid #00aa00;
+            color: #666666;
+            border-top: 1px solid #444444;
             padding-top: 1rem;
             margin-top: 1rem;
         }
@@ -291,20 +310,7 @@
         .footer::before {
             content: '─────────────────────────────────────────────\n\n';
             display: block;
-            color: #00aa00;
-        }
-
-        /* System info display */
-        .system-info {
-            font-size: 0.85rem;
-            color: #00aa00;
-            margin-bottom: 2rem;
-            padding: 0.5rem;
-            background: rgba(0, 255, 0, 0.03);
-        }
-
-        .system-info div {
-            margin-bottom: 0.25rem;
+            color: #444444;
         }
 
         @media (max-width: 768px) {
@@ -326,17 +332,17 @@
     <div class="container">
         <div class="terminal-header"></div>
 
-        <h1><span class="logo-convo">CONVO</span><span class="logo-canvas">CANVAS</span></h1>
+        <h1><span class="logo-convo">Convo</span><span class="logo-canvas">Canvas</span></h1>
 
         <p class="tagline">Transform conversations into structured knowledge</p>
 
         <div class="status">Currently in Development</div>
 
         <div class="system-info">
-            <div>[SYS] Initializing ConvoCanvas v0.1.0-alpha</div>
-            <div>[SYS] AI Infrastructure: ONLINE</div>
-            <div>[SYS] Local LLM Processing: ENABLED</div>
-            <div>[SYS] Knowledge Graph Engine: READY</div>
+            <div><span class="label">[SYS]</span> Initializing ConvoCanvas v0.1.0-alpha</div>
+            <div><span class="label">[SYS]</span> AI Infrastructure: <span class="value">ONLINE</span></div>
+            <div><span class="label">[SYS]</span> Local LLM Processing: <span class="value">ENABLED</span></div>
+            <div><span class="label">[SYS]</span> Knowledge Graph Engine: <span class="value">READY</span></div>
         </div>
 
         <div class="description">
