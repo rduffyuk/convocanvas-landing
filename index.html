@@ -113,18 +113,32 @@
             100% { background-position: 200% 50%; }
         }
 
-        /* Coming Soon message */
+        /* Coming Soon message - terminal style */
         .coming-soon {
             font-size: 2rem;
-            color: #ffff00;
+            color: #00ff00;
             margin-bottom: 2rem;
-            font-weight: bold;
-            animation: pulse 2s ease-in-out infinite;
+            font-weight: normal;
+            text-align: left;
+            display: inline-block;
+            position: relative;
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
+        .coming-soon::before {
+            content: '> ';
+            color: #00ff00;
+        }
+
+        .coming-soon::after {
+            content: '█';
+            color: #00ff00;
+            margin-left: 0.2rem;
+            animation: cursorBlink 1s step-end infinite;
+        }
+
+        @keyframes cursorBlink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
         }
 
         /* Tagline */
